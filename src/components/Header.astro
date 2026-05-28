@@ -46,10 +46,20 @@ const path = Astro.url.pathname;
     justify-content: space-between;
     gap: 1rem;
   }
+
+  /* circular focus ring for the avatar (override default rectangular) */
+  .brand:focus-visible {
+    outline: none;
+  }
+  .brand:focus-visible .brand-mark {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.65rem;
     color: var(--fg-strong);
     border-bottom: 0 !important;
     font-weight: 600;
@@ -59,6 +69,7 @@ const path = Astro.url.pathname;
   .brand:hover { color: var(--accent); }
   .brand:hover .brand-mark {
     box-shadow: 0 0 0 2px var(--accent);
+    transform: scale(1.05);
   }
   .brand-mark {
     width: 40px;
@@ -66,9 +77,13 @@ const path = Astro.url.pathname;
     border-radius: 50%;
     background: var(--bg-elev);
     box-shadow: 0 0 0 1px var(--border);
-    transition: box-shadow var(--tx);
+    transition: box-shadow var(--tx), transform var(--tx);
     display: block;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .brand:hover .brand-mark { transform: none; }
+  }
+
   nav ul {
     list-style: none;
     padding: 0;
@@ -82,13 +97,13 @@ const path = Astro.url.pathname;
     color: var(--muted);
     border-bottom: 0 !important;
     position: relative;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
   }
-  /* underline: appears from right, disappears to left (wipe-through) */
+  /* underline: appears from right (enter), exits to left */
   nav a::after {
     content: "";
     position: absolute;
-    left: 0; right: 0; bottom: 0;
+    left: 0; right: 0; bottom: -1px;
     height: 1px;
     background: var(--accent);
     transform: scaleX(0);
@@ -109,7 +124,7 @@ const path = Astro.url.pathname;
     transform-origin: left;
   }
 
-  /* mobile: nav becomes a horizontal scroll strip below brand */
+  /* mobile: horizontal scroll tab strip */
   @media (max-width: 640px) {
     .site-header {
       flex-direction: column;
@@ -120,12 +135,16 @@ const path = Astro.url.pathname;
       width: 100%;
       overflow-x: auto;
       scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.25rem 0 0.4rem;
+      margin-inline: 0;
     }
     nav ul {
       flex-wrap: nowrap;
       gap: 1.2rem;
       white-space: nowrap;
-      padding-bottom: 0.4rem;
+      scroll-snap-type: x proximity;
     }
+    nav li { scroll-snap-align: start; }
   }
 </style>

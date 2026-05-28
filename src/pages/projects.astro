@@ -7,23 +7,24 @@ const projects = [
     summary: 'スキルマーケットの公開データを毎朝自動収集し、売れ筋・新着・価格動向を Markdown レポート化する CLI。',
     tags: ['Python', 'sqlite', 'BeautifulSoup', 'cron'],
     evidence: [
-      '毎朝 7:30 cron で自動実行（13日連続稼働中）',
+      '毎朝 7:30 cron で継続実行し、日次レポートを自動生成',
       '価格・実績・カテゴリを SQLite に履歴保存',
-      '前日差分・カテゴリ別中央値・新着件数を含むレポート生成',
-      '価格パース不具合を検出→修正→過去 379 行のデータ補正まで実施',
+      '前日差分・カテゴリ別中央値・新着件数を含むレポート構成',
+      '価格パース不具合を検出 → 修正 → 過去データの一括補正まで対応',
     ],
     article: null,
     code: null,
-    note: '非公開（対象サイトの利用規約配慮のため）',
+    note: '公開範囲を制限',
+    noteReason: '対象サイトの利用規約に配慮し、コードは非公開',
   },
   {
     name: 'code-aide',
-    summary: 'Claude / Codex / Gemini / OpenRouter を組み合わせ、コードレビューや差分提案を「別エンジンに委ねる」CLI と MCP ツール群。',
+    summary: '複数 LLM を使い分け、コードレビュー・差分提案・コスト見積もりを CLI から実行する支援ツール。Claude / Codex / Gemini / OpenRouter を OpenRouter 経由で統一インタフェース化。',
     tags: ['Python', 'LLM', 'MCP', 'OpenRouter'],
     evidence: [
-      '4 系統 LLM を統一インタフェースで切替（OpenRouter経由）',
       'MCP サーバとして登録、Claude Code から直接呼び出し可',
       'レビュー 1 回あたりの概算コストを末尾表示',
+      'review / ask / propose / map / find などのサブコマンド',
     ],
     code: 'https://github.com/logicia32/code-aide',
     article: null,
@@ -44,7 +45,7 @@ const projects = [
     summary: 'AD コンバータ前段の 4 次ローパスフィルタを E12 / E24 系列で組み、PySpice で本物の Bode 線図を出すまでの実証。',
     tags: ['PySpice', '回路設計', 'Bode'],
     evidence: [
-      '部品定数を実在 E系列に丸めた前後の特性差を比較',
+      '部品定数を実在 E 系列に丸めた前後の特性差を比較',
       'PySpice で AC 解析・位相応答・群遅延を可視化',
       '17,500 字の記事に手順と再現コードを収録',
     ],
@@ -66,7 +67,7 @@ const projects = [
     summary: '同じ Verilog を Yosys と iverilog で 3 回シミュレートし、合成前後で振る舞いが変わる箇所を観察する。',
     tags: ['Verilog', 'Yosys', 'iverilog', 'FPGA'],
     evidence: [
-      'RTL / Synth / Place-and-route の3段階で同じ刺激を流す',
+      'RTL / Synth / Place-and-route の 3 段階で同じ刺激を流す',
       '合成最適化で消えた信号と残った信号を可視化',
       '検証戦略の落とし穴を実例で記録',
     ],
@@ -82,24 +83,32 @@ const projects = [
   </p>
 
   <div class="cards cards--stack">
-    {projects.map(p => (
-      <article class="card project-card">
-        <h3>
-          {p.code ? <a href={p.code} target="_blank" rel="noopener">{p.name}</a> : p.name}
-        </h3>
-        <p>{p.summary}</p>
-        <ul class="evidence-list">
-          {p.evidence.map(e => <li>{e}</li>)}
-        </ul>
-        <div class="project-link-row">
-          {p.article && <a href={p.article} target="_blank" rel="noopener">Article →</a>}
-          {p.code && <a href={p.code} target="_blank" rel="noopener">Code →</a>}
-          {p.note && <span class="badge" title={p.note}>{p.note}</span>}
-        </div>
-        <ul class="tag-list">
-          {p.tags.map(t => <li>{t}</li>)}
-        </ul>
-      </article>
-    ))}
+    {projects.map(p => {
+      const mainLink = p.article || p.code;
+      return (
+        <article class="card project-card">
+          <h3>
+            {mainLink ? <a href={mainLink} target="_blank" rel="noopener">{p.name}</a> : p.name}
+          </h3>
+          <ul class="tag-list">
+            {p.tags.map(t => <li>{t}</li>)}
+          </ul>
+          <p>{p.summary}</p>
+          <ul class="evidence-list">
+            {p.evidence.map(e => <li>{e}</li>)}
+          </ul>
+          <div class="project-link-row">
+            {p.article && <a href={p.article} target="_blank" rel="noopener">記事 →</a>}
+            {p.code && <a href={p.code} target="_blank" rel="noopener">コード →</a>}
+            {p.note && (
+              <span class="private-note">
+                <span class="badge">PRIVATE</span>
+                <span class="reason">{p.noteReason ?? p.note}</span>
+              </span>
+            )}
+          </div>
+        </article>
+      );
+    })}
   </div>
 </Base>
