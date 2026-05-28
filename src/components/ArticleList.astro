@@ -3,15 +3,30 @@ import type { Article } from '../data/articles';
 
 interface Props {
   articles: Article[];
+  /** Fallback link target when an article has no specific URL. */
+  profileUrl?: string;
+  profileLabel?: string;
 }
 
-const { articles } = Astro.props;
+const {
+  articles,
+  profileUrl = 'https://zenn.dev/logicia32',
+  profileLabel = 'Zenn で探す →',
+} = Astro.props;
 ---
 <ul class="article-list">
   {articles.map(a => (
     <li>
-      <span class="date">{a.date}</span>
-      <a href={a.url} target="_blank" rel="noopener">{a.title}</a>
+      <time datetime={a.date} class="date">{a.date}</time>
+      {a.url
+        ? <a href={a.url} target="_blank" rel="noopener">{a.title}</a>
+        : (
+          <span class="title-with-hint">
+            <span class="plain-title">{a.title}</span>
+            <a class="hint" href={profileUrl} target="_blank" rel="noopener">{profileLabel}</a>
+          </span>
+        )
+      }
     </li>
   ))}
 </ul>
@@ -51,6 +66,26 @@ const { articles } = Astro.props;
     border-bottom: 1px solid transparent;
   }
   .article-list a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .title-with-hint {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.85rem;
+  }
+  .title-with-hint .plain-title {
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .title-with-hint .hint {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .title-with-hint .hint:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
   }

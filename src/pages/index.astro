@@ -68,6 +68,96 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <style>
+    /* hero (TOP-only) */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(2.3rem, 6vw, 3.6rem);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .hero .accent-bar {
+      display: block;
+      width: 56px;
+      height: 3px;
+      background: var(--accent);
+      margin: 1.4rem 0 0;
+      border-radius: 2px;
+    }
+    .hero .role {
+      margin: 0.8rem 0 0;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero :global(.lede) { margin-top: 1.6rem; }
+    .hero p:global(.lede) { text-wrap: balance; }
+
+    /* TOP-only nav cards (3-up grid of clickable anchors) */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      margin: 2.5rem 0;
+      max-width: 100%;
+    }
+    @media (min-width: 720px) {
+      .cards { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .card {
+      position: relative;
+      display: block;
+      padding: 1.3rem 1.35rem 1.4rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--tx), border-color var(--tx), box-shadow var(--tx);
+    }
+    a.card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity var(--tx);
+    }
+    a.card:hover,
+    a.card:focus-visible {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px -16px var(--shadow-accent);
+    }
+    a.card:hover::after,
+    a.card:focus-visible::after { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      a.card:hover, a.card:focus-visible { transform: none; }
+    }
+    .card .num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .card h3 {
+      margin: 0.4rem 0 0.3rem;
+      font-size: 1.02rem;
+      color: var(--fg-strong);
+    }
+    .card p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: none;
+    }
+
+    /* lab hero image */
     .lab {
       margin: 2.5rem 0 0;
       padding: 0;

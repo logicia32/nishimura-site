@@ -18,6 +18,7 @@
   --shadow-accent: rgba(15, 118, 110, 0.22);
   --grid:          rgba(20, 24, 31, 0.05);
   --btn-fg:        #ffffff;
+  --danger:        #dc2626;
 
   --max-width:    860px;
   --measure:      680px;
@@ -43,6 +44,7 @@
     --shadow-accent: rgba(94, 234, 212, 0.28);
     --grid:          rgba(255, 255, 255, 0.035);
     --btn-fg:        #06110f;
+    --danger:        #fca5a5;
   }
 }
 

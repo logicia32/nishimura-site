@@ -1,17 +1,12 @@
 ---
-interface Props {
-  name: string;
-  summary: string;
-  tags: string[];
-  evidence: string[];
-  article?: string | null;
-  code?: string | null;
-  note?: string;
-  noteReason?: string;
-}
+import type { CollectionEntry } from 'astro:content';
+
+type Props = CollectionEntry<'projects'>['data'];
 
 const { name, summary, tags, evidence, article, code, note, noteReason } = Astro.props;
 const mainLink = article || code || null;
+const isSpecificArticle = !!article && /\/articles\//.test(article);
+const articleLabel = isSpecificArticle ? '記事 →' : 'Zennで読む →';
 ---
 <article class="project-card">
   <h3>
@@ -25,7 +20,7 @@ const mainLink = article || code || null;
     {evidence.map(e => <li>{e}</li>)}
   </ul>
   <div class="project-link-row">
-    {article && <a href={article} target="_blank" rel="noopener">記事 →</a>}
+    {article && <a href={article} target="_blank" rel="noopener">{articleLabel}</a>}
     {code && <a href={code} target="_blank" rel="noopener">コード →</a>}
     {note && (
       <span class="private-note">

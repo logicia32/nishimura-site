@@ -1,7 +1,12 @@
 export interface Article {
   date: string; // YYYY-MM-DD
   title: string;
-  url: string;
+  /**
+   * Direct article URL (e.g. https://zenn.dev/<user>/articles/<slug>).
+   * Null = no direct URL known; ArticleList will render a fallback link
+   * to the Zenn profile so the reader can find it manually.
+   */
+  url: string | null;
 }
 
 export const articles: Article[] = [
@@ -15,25 +20,25 @@ export const articles: Article[] = [
     date: '2026-05-27',
     title:
       '実機なしの STM32 で三相電力、続き — 不平衡・低力率で崩れるもの、崩れないもの(2電力計法)',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-26',
     title:
       '実機を使わずに STM32 を動かして、三相電力を測ってみる — Python の中だけで(2電力計法)',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-25',
     title:
       'KiCad を使わずに、Python だけで基板を"配線"してみる — 素朴な迷路法で',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-22',
     title:
       '同じ RTL を 3 回シミュレートする — Yosys と iverilog で、合成と配置配線で剥がれていくもの',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-21',
@@ -51,19 +56,19 @@ export const articles: Article[] = [
     date: '2026-05-19',
     title:
       'Z80(ゼッパチ)を4個つないで円周率を求めてみた — 並列で速くなる計算と、何台つないでも速くならない計算',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-18',
     title:
       'ゼッパチを、いまの机に蘇らせる — Z80 で C の printf と二分探索を、電源オンの 0x0000 から動かす',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-16',
     title:
       'ngspice の壁、sudo 無しで越えた — PySpice で本物の Bode 線図が出るまで',
-    url: 'https://zenn.dev/logicia32',
+    url: null,
   },
   {
     date: '2026-05-16',

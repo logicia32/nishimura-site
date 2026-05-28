@@ -117,11 +117,8 @@ import Base from '../layouts/Base.astro';
       font-weight: 500;
     }
     .status.is-error {
-      color: #dc2626;
+      color: var(--danger);
       font-weight: 500;
-    }
-    @media (prefers-color-scheme: dark) {
-      .status.is-error { color: #fca5a5; }
     }
 
     /* submit button states */
