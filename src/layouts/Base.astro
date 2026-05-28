@@ -17,6 +17,27 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
+
+const isTop = Astro.url.pathname === '/';
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'K. NISHIMURA',
+  alternateName: 'logicia32',
+  jobTitle: '組込み・産業AI エンジニア',
+  description: 'FPGA / 組込み / 産業AI を 20 年以上、製造・産業の現場で実装してきたエンジニア。',
+  url: 'https://nishimura-site.kix-dae.workers.dev/',
+  image: 'https://nishimura-site.kix-dae.workers.dev/img/snowball-128.png',
+  knowsAbout: [
+    'FPGA', 'Verilog', '組込みシステム', 'マイコンファームウェア',
+    'Python', '産業AI', '異常検知', '信号処理',
+  ],
+  sameAs: [
+    'https://zenn.dev/logicia32',
+    'https://github.com/logicia32',
+    'https://coconala.com/users/6098038',
+  ],
+};
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -49,6 +70,10 @@ const ogUrl = new URL(ogImage, Astro.site);
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;700&display=swap"
   />
+
+  {isTop && (
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+  )}
 </head>
 <body>
   <Header />
