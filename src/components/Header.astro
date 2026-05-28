@@ -10,14 +10,18 @@ const path = Astro.url.pathname;
 ---
 <header class="site-header">
   <a href="/" class="brand">
-    <span class="brand-mark">K</span>
+    <span class="brand-mark" aria-hidden="true">K</span>
     <span class="brand-name">K. NISHIMURA</span>
   </a>
-  <nav>
+  <nav aria-label="主要ナビゲーション">
     <ul>
       {links.map(l => (
         <li>
-          <a href={l.href} class={path === l.href ? 'active' : ''}>{l.label}</a>
+          <a
+            href={l.href}
+            class={path === l.href ? 'active' : ''}
+            aria-current={path === l.href ? 'page' : undefined}
+          >{l.label}</a>
         </li>
       ))}
     </ul>
@@ -38,7 +42,7 @@ const path = Astro.url.pathname;
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.55rem;
     color: var(--fg-strong);
     border-bottom: 0 !important;
     font-weight: 600;
@@ -56,7 +60,7 @@ const path = Astro.url.pathname;
     color: var(--bg);
     font-family: var(--font-sans);
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     font-size: 0.95rem;
     line-height: 1;
   }
