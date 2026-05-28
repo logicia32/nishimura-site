@@ -1,0 +1,41 @@
+---
+import type { Service } from '../data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const meta = [service.leadTime, service.deliverables].filter(Boolean).join(' / ');
+---
+<section class="service">
+  <h2>{service.title}</h2>
+  <p class="price"><strong>{service.price}</strong>{meta && ` / ${meta}`}</p>
+  <p>{service.summary}</p>
+  <ul>
+    {service.items.map(item => <li>{item}</li>)}
+  </ul>
+</section>
+
+<style>
+  .service {
+    padding: 1.6rem 0 1.4rem;
+    border-top: 1px solid var(--border);
+  }
+  .service:first-of-type {
+    border-top: none;
+    padding-top: 0.5rem;
+  }
+  .service h2 { margin-top: 0; }
+  .service .price {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.4rem 0 0.8rem;
+    letter-spacing: 0.02em;
+  }
+  .service .price strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+</style>

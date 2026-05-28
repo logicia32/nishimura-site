@@ -1,0 +1,111 @@
+/* ------------------------------------------------------------------
+ * Base — reset, html/body, layout, typography, focus, selection.
+ * EDIT HERE to change site-wide element defaults.
+ * ------------------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "ss01", "cv11";
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--grid) 1px, transparent 1px),
+    radial-gradient(ellipse at top, rgba(94, 234, 212, 0.04) 0%, transparent 60%);
+  background-size: 24px 24px, 100% 100%;
+  background-attachment: fixed, fixed;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--grid) 1px, transparent 1px);
+  }
+}
+
+/* focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* layout */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 1.5rem 6rem;
+}
+
+section { margin: 3.5rem 0; }
+section:first-of-type { margin-top: 1rem; }
+
+p, ul, ol { max-width: var(--measure); }
+
+/* typography */
+h1, h2, h3 {
+  color: var(--fg-strong);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  margin: 3.5rem 0 1.2rem;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--accent);
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-size: 1.02rem;
+  margin: 1.4rem 0 0.4rem;
+  letter-spacing: 0;
+}
+
+p { margin: 0.9rem 0; }
+
+ul, ol { padding-left: 1.3rem; }
+li { margin: 0.35rem 0; }
+li::marker { color: var(--muted); }
+
+strong { color: var(--fg-strong); font-weight: 600; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--tx), color var(--tx);
+}
+a:hover { border-bottom-color: var(--accent); }
+
+code {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--btn-fg);
+}

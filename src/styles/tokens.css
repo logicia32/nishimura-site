@@ -1,0 +1,55 @@
+/* ------------------------------------------------------------------
+ * Design tokens — colors, spacing, type. Light + dark.
+ * EDIT HERE to change palette / radius / fonts site-wide.
+ * ------------------------------------------------------------------ */
+:root {
+  color-scheme: light dark;
+
+  /* light */
+  --bg:            #f7f5ef;
+  --bg-elev:       #ffffff;
+  --fg:            #14181f;
+  --fg-strong:     #06090f;
+  --muted:         #5a6477;
+  --border:        #e0dcce;
+  --accent:        #0f766e;
+  --accent-strong: #0d9488;
+  --accent-soft:   rgba(15, 118, 110, 0.10);
+  --shadow-accent: rgba(15, 118, 110, 0.22);
+  --grid:          rgba(20, 24, 31, 0.05);
+  --btn-fg:        #ffffff;
+
+  --max-width:    860px;
+  --measure:      680px;
+  --radius:       8px;
+  --radius-sm:    6px;
+  --tx:           0.2s ease;
+
+  --font-sans:  "Inter", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:            #0a0e14;
+    --bg-elev:       #101722;
+    --fg:            #d8dee9;
+    --fg-strong:     #f5f7fa;
+    --muted:         #9aa4b5;
+    --border:        #222b3a;
+    --accent:        #5eead4;
+    --accent-strong: #5eead4;
+    --accent-soft:   rgba(94, 234, 212, 0.12);
+    --shadow-accent: rgba(94, 234, 212, 0.28);
+    --grid:          rgba(255, 255, 255, 0.035);
+    --btn-fg:        #06110f;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "urekko",
+  "order": 10,
+  "summary": "スキルマーケットの公開データを毎朝自動収集し、売れ筋・新着・価格動向を Markdown レポート化する CLI。",
+  "tags": ["Python", "sqlite", "BeautifulSoup", "cron"],
+  "evidence": [
+    "毎朝 7:30 cron で継続実行し、日次レポートを自動生成",
+    "価格・実績・カテゴリを SQLite に履歴保存",
+    "前日差分・カテゴリ別中央値・新着件数を含むレポート構成",
+    "価格パース不具合を検出 → 修正 → 過去データの一括補正まで対応"
+  ],
+  "article": null,
+  "code": null,
+  "note": "公開範囲を制限",
+  "noteReason": "対象サイトの利用規約に配慮し、コードは非公開"
+}

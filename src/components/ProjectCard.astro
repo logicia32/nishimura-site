@@ -1,0 +1,131 @@
+---
+interface Props {
+  name: string;
+  summary: string;
+  tags: string[];
+  evidence: string[];
+  article?: string | null;
+  code?: string | null;
+  note?: string;
+  noteReason?: string;
+}
+
+const { name, summary, tags, evidence, article, code, note, noteReason } = Astro.props;
+const mainLink = article || code || null;
+---
+<article class="project-card">
+  <h3>
+    {mainLink ? <a href={mainLink} target="_blank" rel="noopener">{name}</a> : name}
+  </h3>
+  <ul class="tag-list">
+    {tags.map(t => <li>{t}</li>)}
+  </ul>
+  <p>{summary}</p>
+  <ul class="evidence-list">
+    {evidence.map(e => <li>{e}</li>)}
+  </ul>
+  <div class="project-link-row">
+    {article && <a href={article} target="_blank" rel="noopener">記事 →</a>}
+    {code && <a href={code} target="_blank" rel="noopener">コード →</a>}
+    {note && (
+      <span class="private-note">
+        <span class="badge">PRIVATE</span>
+        <span class="reason">{noteReason ?? note}</span>
+      </span>
+    )}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    padding: 1.4rem 1.45rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform var(--tx), border-color var(--tx), box-shadow var(--tx);
+  }
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    box-shadow: 0 8px 24px -16px var(--shadow-accent);
+  }
+  .project-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0;
+  }
+  .project-card h3 a {
+    color: inherit;
+    border-bottom: 1px solid transparent;
+  }
+  .project-card h3 a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .project-card h3 a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .project-card > * { position: relative; z-index: 2; }
+  .project-card p {
+    margin: 0 0 0.6rem;
+    color: var(--fg);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+  .project-card .tag-list {
+    margin: 0 0 0.7rem;
+  }
+  .project-card .evidence-list {
+    list-style: disc;
+    margin: 0.4rem 0 0.7rem;
+    padding-left: 1.2rem;
+    font-size: 0.86rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .project-card .evidence-list li { margin: 0; }
+  .project-card .evidence-list li::marker { color: var(--accent); }
+  .project-card .project-link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0.4rem 0 0;
+    align-items: center;
+  }
+  .project-card .project-link-row a {
+    position: relative;
+    z-index: 3;
+  }
+  .project-card .private-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .project-card .badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.12rem 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .project-card .private-note .reason {
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+</style>

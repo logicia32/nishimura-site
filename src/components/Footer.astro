@@ -8,3 +8,30 @@ const year = new Date().getFullYear();
   </p>
   <p class="credit">© {year} K. NISHIMURA</p>
 </footer>
+
+<style>
+  footer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  footer a {
+    color: var(--muted);
+    margin-right: 1.2rem;
+  }
+  footer a:hover { color: var(--accent); }
+  footer p { margin: 0; }
+  footer .credit {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+</style>

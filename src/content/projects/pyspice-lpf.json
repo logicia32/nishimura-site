@@ -1,0 +1,12 @@
+{
+  "name": "PySpice × 4 次 LPF(E12 / E24 で実装)",
+  "order": 40,
+  "summary": "AD コンバータ前段の 4 次ローパスフィルタを E12 / E24 系列で組み、PySpice で本物の Bode 線図を出すまでの実証。",
+  "tags": ["PySpice", "回路設計", "Bode"],
+  "evidence": [
+    "部品定数を実在 E 系列に丸めた前後の特性差を比較",
+    "PySpice で AC 解析・位相応答・群遅延を可視化",
+    "17,500 字の記事に手順と再現コードを収録"
+  ],
+  "article": "https://zenn.dev/logicia32/articles/2026-05-20-pyspice-4th-order-lpf"
+}

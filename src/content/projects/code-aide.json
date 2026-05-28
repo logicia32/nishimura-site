@@ -1,0 +1,13 @@
+{
+  "name": "code-aide",
+  "order": 20,
+  "summary": "複数 LLM を使い分け、コードレビュー・差分提案・コスト見積もりを CLI から実行する支援ツール。Claude / Codex / Gemini / OpenRouter を OpenRouter 経由で統一インタフェース化。",
+  "tags": ["Python", "LLM", "MCP", "OpenRouter"],
+  "evidence": [
+    "MCP サーバとして登録、Claude Code から直接呼び出し可",
+    "レビュー 1 回あたりの概算コストを末尾表示",
+    "review / ask / propose / map / find などのサブコマンド"
+  ],
+  "code": "https://github.com/logicia32/code-aide",
+  "article": null
+}

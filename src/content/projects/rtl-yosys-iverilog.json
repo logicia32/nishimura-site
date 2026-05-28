@@ -1,0 +1,12 @@
+{
+  "name": "RTL の合成 / 配置配線で剥がれるもの(Yosys × iverilog)",
+  "order": 60,
+  "summary": "同じ Verilog を Yosys と iverilog で 3 回シミュレートし、合成前後で振る舞いが変わる箇所を観察する。",
+  "tags": ["Verilog", "Yosys", "iverilog", "FPGA"],
+  "evidence": [
+    "RTL / Synth / Place-and-route の 3 段階で同じ刺激を流す",
+    "合成最適化で消えた信号と残った信号を可視化",
+    "検証戦略の落とし穴を実例で記録"
+  ],
+  "article": "https://zenn.dev/logicia32"
+}
