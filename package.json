@@ -16,5 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "astro": "^6.3.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260528.1"
   }
 }

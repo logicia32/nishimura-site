@@ -1,0 +1,198 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Contact — お問い合わせ" description="組込み・FPGA レビュー、Python 自動化、産業AI 相談のお問い合わせフォーム。">
+  <h1>Contact</h1>
+
+  <p class="lede">
+    ご相談・お見積りはこちらから。原則 24 時間以内に返信します。
+  </p>
+
+  <form id="contact-form" class="contact-form" method="POST" action="/api/contact" novalidate>
+    <div class="field">
+      <label for="name">お名前 <span class="req" aria-hidden="true">*</span></label>
+      <input id="name" name="name" type="text" required maxlength="100" autocomplete="name" />
+    </div>
+
+    <div class="field">
+      <label for="email">メールアドレス <span class="req" aria-hidden="true">*</span></label>
+      <input id="email" name="email" type="email" required maxlength="200" autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="message">ご相談内容 <span class="req" aria-hidden="true">*</span></label>
+      <textarea id="message" name="message" rows="8" required maxlength="5000" placeholder="相談内容・希望期限・予算感などをお書きください。"></textarea>
+      <p class="hint"><span id="count">0</span> / 5000 文字</p>
+    </div>
+
+    <!-- honeypot: bots fill any text field; keep this hidden from humans/AT -->
+    <div class="hp" aria-hidden="true">
+      <label>Website (do not fill):
+        <input name="website" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div class="cta-row">
+      <button class="button" type="submit" id="submit-btn">送信する</button>
+      <a class="button secondary" href="https://coconala.com/users/6098038" target="_blank" rel="noopener">ココナラで相談する</a>
+    </div>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <p class="meta-note">
+    ※ ご相談内容は <a href="https://resend.com" target="_blank" rel="noopener">Resend</a> 経由でメール送信されます。返信用のメールアドレスは入力されたものを使用します。
+  </p>
+
+  <style>
+    .contact-form {
+      max-width: var(--measure);
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .field label {
+      font-size: 0.88rem;
+      color: var(--fg-strong);
+      font-weight: 500;
+    }
+    .field .req {
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-left: 0.2rem;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      background: var(--bg-elev);
+      color: var(--fg-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: 0.95rem;
+      transition: border-color var(--tx), box-shadow var(--tx);
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 8rem;
+      font-family: inherit;
+      line-height: 1.65;
+    }
+    .field input:focus-visible,
+    .field textarea:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .field .hint {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .status {
+      margin: 0;
+      min-height: 1.4em;
+      font-size: 0.92rem;
+    }
+    .status.is-ok {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .status.is-error {
+      color: #dc2626;
+      font-weight: 500;
+    }
+    @media (prefers-color-scheme: dark) {
+      .status.is-error { color: #fca5a5; }
+    }
+
+    /* submit button states */
+    .button[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .button[aria-busy="true"] {
+      position: relative;
+    }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('status');
+      const msg = document.getElementById('message');
+      const count = document.getElementById('count');
+
+      // live character count
+      if (msg && count) {
+        const update = () => { count.textContent = String(msg.value.length); };
+        msg.addEventListener('input', update);
+        update();
+      }
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        status.className = 'status';
+        status.textContent = '';
+
+        if (!form.checkValidity()) {
+          status.className = 'status is-error';
+          status.textContent = '未入力の項目があります。';
+          form.reportValidity();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        const original = btn.textContent;
+        btn.textContent = '送信中…';
+
+        try {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (res.ok && json.ok) {
+            status.className = 'status is-ok';
+            status.textContent = '送信しました。返信までお待ちください。';
+            form.reset();
+            if (count) count.textContent = '0';
+          } else {
+            status.className = 'status is-error';
+            status.textContent = json.error || `送信に失敗しました（${res.status}）。`;
+          }
+        } catch (err) {
+          status.className = 'status is-error';
+          status.textContent = '通信エラーが発生しました。時間をおいて再度お試しください。';
+        } finally {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          btn.textContent = original;
+        }
+      });
+    })();
+  </script>
+</Base>
