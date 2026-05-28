@@ -27,19 +27,6 @@ export default {
       });
     }
 
-    if (url.pathname === '/api/_debug-env') {
-      // diagnostic only: list binding keys + length of secrets (no values)
-      const keys = Object.keys(env as unknown as Record<string, unknown>);
-      const info = {
-        keys,
-        hasResend: !!env.RESEND_API_KEY,
-        resendLen: typeof env.RESEND_API_KEY === 'string' ? env.RESEND_API_KEY.length : null,
-        hasTo: !!env.CONTACT_TO_EMAIL,
-        toLen: typeof env.CONTACT_TO_EMAIL === 'string' ? env.CONTACT_TO_EMAIL.length : null,
-      };
-      return jsonResponse(info);
-    }
-
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
