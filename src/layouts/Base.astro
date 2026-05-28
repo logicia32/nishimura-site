@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description = '組込み・産業AI エンジニア（20年+）。設計・コードレビュー、業務自動化、技術相談。',
-  ogImage = '/og.png',
+  ogImage = '/og.jpg',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -32,12 +32,16 @@ const ogUrl = new URL(ogImage, Astro.site);
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogUrl} />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%230a0e14'/%3E%3Ctext y='.82em' x='.13em' font-family='Inter,sans-serif' font-weight='700' font-size='86' fill='%235eead4'%3EK%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="128x128" href="/img/snowball-128.png" />
+  <link rel="apple-touch-icon" href="/img/snowball-128.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
