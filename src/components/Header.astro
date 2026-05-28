@@ -1,47 +1,95 @@
 ---
 const links = [
-  { href: '/', label: 'TOP' },
-  { href: '/about/', label: 'About' },
-  { href: '/work/', label: 'Work' },
-  { href: '/projects/', label: 'Projects' },
+  { href: '/',         label: 'TOP' },
+  { href: '/about/',   label: 'About' },
+  { href: '/work/',    label: 'Work' },
+  { href: '/projects/',label: 'Projects' },
   { href: '/writing/', label: 'Writing' },
 ];
 const path = Astro.url.pathname;
 ---
-<nav>
-  <ul>
-    {links.map(l => (
-      <li>
-        <a href={l.href} class={path === l.href ? 'active' : ''}>{l.label}</a>
-      </li>
-    ))}
-  </ul>
-</nav>
+<header class="site-header">
+  <a href="/" class="brand">
+    <span class="brand-mark">K</span>
+    <span class="brand-name">K. NISHIMURA</span>
+  </a>
+  <nav>
+    <ul>
+      {links.map(l => (
+        <li>
+          <a href={l.href} class={path === l.href ? 'active' : ''}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
 
 <style>
-  nav {
+  .site-header {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1.2rem 1.5rem 0;
+    padding: 1.5rem 1.5rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
-  ul {
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--fg-strong);
+    border-bottom: 0 !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+  .brand:hover { color: var(--accent); }
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+  nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem 1.4rem;
-    font-size: 0.95rem;
+    gap: 0.4rem 1.2rem;
+    font-size: 0.92rem;
   }
-  a {
+  nav a {
     color: var(--muted);
+    border-bottom: 0 !important;
+    position: relative;
+    padding-bottom: 2px;
   }
-  a.active {
-    color: var(--fg);
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.18s ease;
+  }
+  nav a:hover { color: var(--fg-strong); }
+  nav a:hover::after { transform: scaleX(1); }
+  nav a.active {
+    color: var(--fg-strong);
     font-weight: 600;
   }
-  a:hover {
-    color: var(--accent);
-    text-decoration: none;
-  }
+  nav a.active::after { transform: scaleX(1); }
 </style>

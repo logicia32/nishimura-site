@@ -4,38 +4,86 @@ import Base from '../layouts/Base.astro';
 <Base title="K. NISHIMURA — 組込み・産業AI エンジニア">
   <section class="hero">
     <h1>K. NISHIMURA</h1>
-    <p class="role">組込み・産業AI エンジニア（20年+）</p>
+    <span class="accent-bar"></span>
+    <p class="role">Embedded × Industrial AI · 20+ yrs</p>
+    <p class="lede">
+      FPGA / Verilog、マイコンのファームウェア、Python での自動化・データ処理・異常検知を、製造・産業の現場で実装してきました。
+    </p>
+    <p>
+      派手な成果を約束するより、「現場で本当に動くか」「後で困らないか」という地味な観点を大事にしています。記事には動くコードや実測データを添えるようにしています。
+    </p>
+
+    <figure class="scope" aria-hidden="true">
+      <img src="/og.png" alt="" width="1344" height="768" loading="eager" />
+      <figcaption>
+        <span class="ch">CH1</span>
+        <span class="sep">·</span>
+        <span class="val">20 yrs / industrial</span>
+      </figcaption>
+    </figure>
   </section>
-
-  <p class="lede">
-    FPGA / Verilog、マイコンのファームウェア、Python での自動化・データ処理・異常検知を、製造・産業の現場で実装してきました。
-  </p>
-
-  <p>
-    派手な成果を約束するより、「現場で本当に動くか」「後で困らないか」という地味な観点を大事にしています。
-    記事には動くコードや実測データを添えるようにしています。
-  </p>
 
   <div class="cards">
     <a class="card" href="/about/">
-      <h3>About →</h3>
-      <p>経歴・スキル・仕事のしかた</p>
+      <span class="num">01 / About</span>
+      <h3>経歴・スキル</h3>
+      <p>組込み・産業AI・FPGA で 20 年。仕事のしかたも。</p>
     </a>
     <a class="card" href="/work/">
-      <h3>Work →</h3>
-      <p>受託メニューと進め方</p>
+      <span class="num">02 / Work</span>
+      <h3>受託メニュー</h3>
+      <p>レビュー、自動化、AI 導入相談の進め方。</p>
     </a>
     <a class="card" href="/writing/">
-      <h3>Writing →</h3>
-      <p>Zenn の技術記事を抜粋</p>
+      <span class="num">03 / Writing</span>
+      <h3>技術記事</h3>
+      <p>Zenn で「動かしたもの」を書いています。</p>
     </a>
   </div>
 
-  <h2>最近の関心</h2>
-  <ul>
-    <li>PySpice / schemdraw / skidl — 回路設計を「コード」として書き、再現性と差分管理を上げる試み</li>
-    <li>STM32 + Python シミュレーションで三相電力計測を実機なしで検証する</li>
-    <li>Yosys / iverilog による RTL の合成前後のシミュレーション比較</li>
-    <li>産業 IoT のコスト構造（衛星 / セルラー / LPWA）の現場的な比較</li>
-  </ul>
+  <section>
+    <h2>最近の関心</h2>
+    <ul>
+      <li><strong>PySpice / schemdraw / skidl</strong> — 回路設計を「コード」として書き、再現性と差分管理を上げる試み</li>
+      <li><strong>STM32 + Python</strong> シミュレーションで三相電力計測を実機なしで検証する</li>
+      <li><strong>Yosys / iverilog</strong> による RTL の合成前後のシミュレーション比較</li>
+      <li><strong>産業 IoT のコスト構造</strong>（衛星 / セルラー / LPWA）の現場的な比較</li>
+    </ul>
+  </section>
+
+  <style>
+    .scope {
+      margin: 2.5rem 0 0;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+    .scope img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.95;
+    }
+    .scope figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: rgba(94, 234, 212, 0.85);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .scope .sep { opacity: 0.4; }
+    .scope .val { color: rgba(216, 222, 233, 0.7); }
+  </style>
 </Base>
