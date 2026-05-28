@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+
+const skills = [
+  'C', 'C++', 'Python', 'Verilog', 'FPGA',
+  'Linux', 'Ubuntu', 'SQLite', 'Git', 'GitHub',
+  'Excel', 'Google Workspace', 'PowerPoint',
+  'ChatGPT', 'Claude', 'OpenRouter',
+];
+
+const career = [
+  { years: '20年', label: '製品エンジニア（ハードウェア）', detail: '組込み・FPGA・産業向け基板設計と実装' },
+  { years: '10年', label: 'AI / 機械学習エンジニア', detail: '組込み AI・異常検知・信号処理での実装' },
+  { years: '10年', label: 'バックエンドエンジニア', detail: '産業システムのデータ処理・自動化' },
+];
+---
+<Base title="About — K. NISHIMURA" description="経歴・スキル・仕事のしかた。組込み・産業AI 20年。">
+  <h1>About</h1>
+
+  <p>
+    はじめまして。組込みと産業向けの AI を中心に、20年以上エンジニアをしています。
+    現場でハードウェアに触りながら、ファームウェア、データ処理、AI モデルの実装まで一通り手を動かしてきました。
+  </p>
+
+  <h2>経歴</h2>
+  <ul>
+    {career.map(c => (
+      <li><strong>{c.years}</strong> — {c.label}：{c.detail}</li>
+    ))}
+  </ul>
+
+  <h2>得意領域</h2>
+  <ul>
+    <li>FPGA / Verilog の設計・検証・第三者レビュー</li>
+    <li>マイコン（STM32 など）ファームウェア</li>
+    <li>Python での業務自動化、データ処理、異常検知</li>
+    <li>産業 IoT・センシング基板の保護回路や信号処理</li>
+    <li>AI / 機械学習モデルの組込み実装と運用</li>
+  </ul>
+
+  <h2>スキル</h2>
+  <ul class="tag-list">
+    {skills.map(s => <li>{s}</li>)}
+  </ul>
+
+  <h2>仕事のしかた</h2>
+  <ul>
+    <li>「考えた」より「動かした」を優先します。記事や提案には動くコードや実測を添えます。</li>
+    <li>わからないことは「わからない」とお伝えします。依頼が不要と判断した場合はその旨を正直にお話しします。</li>
+    <li>平日日中は別の仕事があるため、メッセージ中心の非同期でのやり取りを基本にしています。</li>
+  </ul>
+</Base>

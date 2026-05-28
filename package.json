@@ -1,0 +1,20 @@
+{
+  "name": "nishimura-site",
+  "version": "0.1.0",
+  "description": "Personal site - K. NISHIMURA",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/logicia32/nishimura-site.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "astro": "^6.3.8"
+  }
+}

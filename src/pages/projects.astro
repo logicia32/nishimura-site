@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+
+const projects = [
+  {
+    name: 'urekko',
+    summary: 'スキルマーケットの公開データを毎朝収集し、売れ筋・新着・価格動向をレポート化する CLI。Python + sqlite + BeautifulSoup。',
+    tags: ['Python', 'sqlite', 'BeautifulSoup', 'cron'],
+    link: null,
+  },
+  {
+    name: 'code-aide',
+    summary: 'Claude / Codex / Gemini / OpenRouter を組み合わせ、コードレビューやリファクタを「別エンジンに委ねる」CLI と MCP ツール群。',
+    tags: ['Python', 'LLM', 'MCP', 'OpenRouter'],
+    link: 'https://github.com/logicia32/code-aide',
+  },
+  {
+    name: 'Z80 並列計算 / 蘇生',
+    summary: '4台の Z80（ゼッパチ）で円周率を並列計算する実験と、Z80 ボードで C の printf や二分探索を 0x0000 から動かす再構築。',
+    tags: ['Z80', 'C', '組込み', 'レトロ'],
+    link: 'https://zenn.dev/logicia32',
+  },
+  {
+    name: 'PySpice × 4次 LPF',
+    summary: 'AD コンバータ前段の 4 次ローパスフィルタを E12 / E24 系列で組み、PySpice で本物の Bode 線図を出すまでの実証。',
+    tags: ['PySpice', '回路設計', 'Bode'],
+    link: 'https://zenn.dev/logicia32/articles/2026-05-20-pyspice-4th-order-lpf',
+  },
+  {
+    name: '実機なし STM32 三相電力測定',
+    summary: '実機を使わずに Python の中だけで STM32 を動かし、不平衡・低力率も含めた三相電力（2 電力計法）を検証する。',
+    tags: ['STM32', 'Python', '信号処理'],
+    link: 'https://zenn.dev/logicia32',
+  },
+  {
+    name: 'RTL の合成 / 配置配線で剥がれるもの',
+    summary: '同じ Verilog を Yosys と iverilog で 3 回シミュレートし、ふるまいの差を観察する。',
+    tags: ['Verilog', 'Yosys', 'iverilog', 'FPGA'],
+    link: 'https://zenn.dev/logicia32',
+  },
+];
+---
+<Base title="Projects — K. NISHIMURA" description="urekko, code-aide, FPGA / 組込み / Python 実証プロジェクト。">
+  <h1>Projects</h1>
+
+  <p>
+    現場の関心事を、手を動かして検証したものを並べています。
+    多くは Zenn の記事と動くコードがセットになっています。
+  </p>
+
+  {projects.map(p => (
+    <section>
+      <h2>{p.link ? <a href={p.link} target="_blank" rel="noopener">{p.name}</a> : p.name}</h2>
+      <p>{p.summary}</p>
+      <ul class="tag-list">
+        {p.tags.map(t => <li>{t}</li>)}
+      </ul>
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,47 @@
+---
+const links = [
+  { href: '/', label: 'TOP' },
+  { href: '/about/', label: 'About' },
+  { href: '/work/', label: 'Work' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/writing/', label: 'Writing' },
+];
+const path = Astro.url.pathname;
+---
+<nav>
+  <ul>
+    {links.map(l => (
+      <li>
+        <a href={l.href} class={path === l.href ? 'active' : ''}>{l.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem 0;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+  }
+  a {
+    color: var(--muted);
+  }
+  a.active {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+</style>
