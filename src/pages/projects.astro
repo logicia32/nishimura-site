@@ -4,57 +4,102 @@ import Base from '../layouts/Base.astro';
 const projects = [
   {
     name: 'urekko',
-    summary: 'スキルマーケットの公開データを毎朝収集し、売れ筋・新着・価格動向をレポート化する CLI。Python + sqlite + BeautifulSoup。',
+    summary: 'スキルマーケットの公開データを毎朝自動収集し、売れ筋・新着・価格動向を Markdown レポート化する CLI。',
     tags: ['Python', 'sqlite', 'BeautifulSoup', 'cron'],
-    link: null,
+    evidence: [
+      '毎朝 7:30 cron で自動実行（13日連続稼働中）',
+      '価格・実績・カテゴリを SQLite に履歴保存',
+      '前日差分・カテゴリ別中央値・新着件数を含むレポート生成',
+      '価格パース不具合を検出→修正→過去 379 行のデータ補正まで実施',
+    ],
+    article: null,
+    code: null,
+    note: '非公開（対象サイトの利用規約配慮のため）',
   },
   {
     name: 'code-aide',
-    summary: 'Claude / Codex / Gemini / OpenRouter を組み合わせ、コードレビューやリファクタを「別エンジンに委ねる」CLI と MCP ツール群。',
+    summary: 'Claude / Codex / Gemini / OpenRouter を組み合わせ、コードレビューや差分提案を「別エンジンに委ねる」CLI と MCP ツール群。',
     tags: ['Python', 'LLM', 'MCP', 'OpenRouter'],
-    link: 'https://github.com/logicia32/code-aide',
+    evidence: [
+      '4 系統 LLM を統一インタフェースで切替（OpenRouter経由）',
+      'MCP サーバとして登録、Claude Code から直接呼び出し可',
+      'レビュー 1 回あたりの概算コストを末尾表示',
+    ],
+    code: 'https://github.com/logicia32/code-aide',
+    article: null,
   },
   {
-    name: 'Z80 並列計算 / 蘇生',
-    summary: '4台の Z80（ゼッパチ）で円周率を並列計算する実験と、Z80 ボードで C の printf や二分探索を 0x0000 から動かす再構築。',
-    tags: ['Z80', 'C', '組込み', 'レトロ'],
-    link: 'https://zenn.dev/logicia32',
+    name: 'Z80 並列計算・低レイヤ再構築',
+    summary: '4 台の Z80（ゼッパチ）で円周率を並列計算する実験と、最小ランタイムを 0x0000 から立ち上げて C の printf と二分探索を動かす再構築。',
+    tags: ['Z80', 'C', '組込み'],
+    evidence: [
+      '電源オン直後の 0x0000 から printf 相当を実装',
+      '4 台構成での並列計算と Amdahl 効率の実測',
+      '記事に動作ログとコードを併載',
+    ],
+    article: 'https://zenn.dev/logicia32',
   },
   {
-    name: 'PySpice × 4次 LPF',
+    name: 'PySpice × 4 次 LPF（E12 / E24 で実装）',
     summary: 'AD コンバータ前段の 4 次ローパスフィルタを E12 / E24 系列で組み、PySpice で本物の Bode 線図を出すまでの実証。',
     tags: ['PySpice', '回路設計', 'Bode'],
-    link: 'https://zenn.dev/logicia32/articles/2026-05-20-pyspice-4th-order-lpf',
+    evidence: [
+      '部品定数を実在 E系列に丸めた前後の特性差を比較',
+      'PySpice で AC 解析・位相応答・群遅延を可視化',
+      '17,500 字の記事に手順と再現コードを収録',
+    ],
+    article: 'https://zenn.dev/logicia32/articles/2026-05-20-pyspice-4th-order-lpf',
   },
   {
-    name: '実機なし STM32 三相電力測定',
-    summary: '実機を使わずに Python の中だけで STM32 を動かし、不平衡・低力率も含めた三相電力（2 電力計法）を検証する。',
+    name: '実機なし STM32 三相電力測定（2 電力計法）',
+    summary: '実機を使わずに Python の中だけで STM32 を動かし、不平衡・低力率を含めた三相電力を検証する。',
     tags: ['STM32', 'Python', '信号処理'],
-    link: 'https://zenn.dev/logicia32',
+    evidence: [
+      'ファーム側ロジックを Python 上でビット精度シミュレート',
+      '不平衡・低力率条件下での誤差傾向を定量化',
+      '実機なしの段階で設計判断を確定できる構成',
+    ],
+    article: 'https://zenn.dev/logicia32',
   },
   {
-    name: 'RTL の合成 / 配置配線で剥がれるもの',
-    summary: '同じ Verilog を Yosys と iverilog で 3 回シミュレートし、ふるまいの差を観察する。',
+    name: 'RTL の合成 / 配置配線で剥がれるもの（Yosys × iverilog）',
+    summary: '同じ Verilog を Yosys と iverilog で 3 回シミュレートし、合成前後で振る舞いが変わる箇所を観察する。',
     tags: ['Verilog', 'Yosys', 'iverilog', 'FPGA'],
-    link: 'https://zenn.dev/logicia32',
+    evidence: [
+      'RTL / Synth / Place-and-route の3段階で同じ刺激を流す',
+      '合成最適化で消えた信号と残った信号を可視化',
+      '検証戦略の落とし穴を実例で記録',
+    ],
+    article: 'https://zenn.dev/logicia32',
   },
 ];
 ---
 <Base title="Projects — K. NISHIMURA" description="urekko, code-aide, FPGA / 組込み / Python 実証プロジェクト。">
   <h1>Projects</h1>
 
-  <p>
-    現場の関心事を、手を動かして検証したものを並べています。
-    多くは Zenn の記事と動くコードがセットになっています。
+  <p class="lede">
+    現場の関心事を、手を動かして検証したものを並べています。多くは Zenn の記事と動くコードがセットになっています。
   </p>
 
-  {projects.map(p => (
-    <section>
-      <h2>{p.link ? <a href={p.link} target="_blank" rel="noopener">{p.name}</a> : p.name}</h2>
-      <p>{p.summary}</p>
-      <ul class="tag-list">
-        {p.tags.map(t => <li>{t}</li>)}
-      </ul>
-    </section>
-  ))}
+  <div class="cards cards--stack">
+    {projects.map(p => (
+      <article class="card project-card">
+        <h3>
+          {p.code ? <a href={p.code} target="_blank" rel="noopener">{p.name}</a> : p.name}
+        </h3>
+        <p>{p.summary}</p>
+        <ul class="evidence-list">
+          {p.evidence.map(e => <li>{e}</li>)}
+        </ul>
+        <div class="project-link-row">
+          {p.article && <a href={p.article} target="_blank" rel="noopener">Article →</a>}
+          {p.code && <a href={p.code} target="_blank" rel="noopener">Code →</a>}
+          {p.note && <span class="badge" title={p.note}>{p.note}</span>}
+        </div>
+        <ul class="tag-list">
+          {p.tags.map(t => <li>{t}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
 </Base>

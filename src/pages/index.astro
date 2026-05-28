@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
       FPGA / Verilog、マイコンのファームウェア、Python での自動化・データ処理・異常検知を、製造・産業の現場で実装してきました。
     </p>
     <p>
-      派手な成果を約束するより、「現場で本当に動くか」「後で困らないか」という地味な観点を大事にしています。記事には動くコードや実測データを添えるようにしています。
+      派手な成果を約束するより、「現場で本当に動くか」「後で困らないか」という地味な観点を大事にしています。提案には動くコードや実測データを添えるようにしています。
     </p>
 
     <figure class="lab">
@@ -27,13 +27,14 @@ import Base from '../layouts/Base.astro';
           width="2188"
           height="718"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
       </picture>
       <figcaption>
-        <span class="lab-ch">LAB</span>
+        <span class="lab-ch">WORKBENCH</span>
         <span class="sep">·</span>
-        <span class="lab-meta">Embedded × Industrial AI workspace</span>
+        <span class="lab-meta">FPGA / firmware / measurement setup</span>
       </figcaption>
     </figure>
   </section>
@@ -47,12 +48,12 @@ import Base from '../layouts/Base.astro';
     <a class="card" href="/work/">
       <span class="num">02 / Work</span>
       <h3>受託メニュー</h3>
-      <p>レビュー、自動化、AI 導入相談の進め方。</p>
+      <p>レビュー、自動化、AI 導入相談（価格・納期目安あり）。</p>
     </a>
-    <a class="card" href="/writing/">
-      <span class="num">03 / Writing</span>
-      <h3>技術記事</h3>
-      <p>Zenn で「動かしたもの」を書いています。</p>
+    <a class="card" href="/projects/">
+      <span class="num">03 / Projects</span>
+      <h3>実証プロジェクト</h3>
+      <p>回路・組込み・AI を実際に動かして検証した記録。</p>
     </a>
   </div>
 
@@ -83,8 +84,12 @@ import Base from '../layouts/Base.astro';
       height: auto;
     }
     .lab img {
-      aspect-ratio: 2188 / 718;
+      aspect-ratio: 16 / 7;
       object-fit: cover;
+      object-position: center 55%;
+    }
+    @media (max-width: 720px) {
+      .lab img { aspect-ratio: 16 / 9; }
     }
     .lab figcaption {
       padding: 0.55rem 0.95rem;
